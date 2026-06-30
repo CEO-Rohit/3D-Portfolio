@@ -79,14 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Rohit Kumar — 3D Web Architect & Creative Developer" },
+      { title: "Rohit Kumar — 3D Web Architect & Full Stack Developer" },
       {
         name: "description",
         content:
           "Portfolio of Rohit Kumar — 3D web architect and creative developer building immersive WebGL experiences.",
       },
       { name: "author", content: "Rohit Kumar" },
-      { property: "og:title", content: "Rohit Kumar — 3D Web Architect" },
+      { property: "og:title", content: "Rohit Kumar — 3D Web Architect & Full Stack Developer" },
       {
         property: "og:description",
         content: "Immersive WebGL portfolio by Rohit Kumar.",
@@ -94,6 +94,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#053931" },
+      { name: "twitter:title", content: "Rohit Kumar — 3D Web Architect & Full Stack Developer" },
+      { name: "description", content: "A 3D animated tech portfolio showcasing a developer's work with immersive visuals and interactive elements." },
+      { property: "og:description", content: "A 3D animated tech portfolio showcasing a developer's work with immersive visuals and interactive elements." },
+      { name: "twitter:description", content: "A 3D animated tech portfolio showcasing a developer's work with immersive visuals and interactive elements." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
