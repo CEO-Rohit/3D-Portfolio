@@ -1,99 +1,67 @@
 
-# Rohit Kumar — 3D Web Architect Portfolio
+## Skills Section + Immersive Contact Form
 
-A cinematic, cyber-minimal portfolio built on the existing TanStack Start + Tailwind v4 stack, themed around the "Aurora Forest" palette (#053931). Focus: a hero WebGL centerpiece, smooth-scroll storytelling, magnetic interactions, and a custom 3D preloader.
+Add a new **Skills** section between Projects and Footer, plus an **immersive Contact** section replacing the current Footer "Let's Connect" role (Footer stays as the outro grid).
 
-## Design System
+### 1. Skills section — real-time 3D scroll simulation
 
-Palette (oklch tokens in `src/styles.css`):
-- `--background` Aurora Forest deep `#02110D`
-- `--surface` `#053931` (the swatch)
-- `--surface-elev` `#0A4F44`
-- `--foreground` `#E8F3EF` (soft mint white)
-- `--muted-foreground` `#7FA89E`
-- `--primary` aurora teal-glow `#1FE0B5`
-- `--accent` cool cyan rim `#5BF0D6`
-- `--border` `rgba(95, 240, 214, 0.12)`
-- Gradients: `--gradient-aurora` (forest → teal glow), `--gradient-glass` (translucent surface)
-- Shadows: `--shadow-glow` (teal bloom), `--shadow-elevated`
+`src/components/sections/Skills.tsx` + `src/components/three/SkillsOrbit.tsx`
 
-Typography (loaded via `<link>` in `__root.tsx`):
-- Display: **Syncopate** (700/400) for hero + section headers
-- Body: **Space Grotesk** (400/500/600)
-- Mono: **JetBrains Mono** for code/labels/time
+- Sticky-scroll section (~2.5x viewport tall) with a pinned R3F canvas on the left and scroll-driven skill copy on the right.
+- 3D scene: a central glowing icosahedron core with **6 orbiting nodes** — one per skill (Java, Spring Boot, Microservices, React, Three.js, 3D Web Dev). Each node is an instanced mesh with a distinctive geometry (torus knot, cube, cluster, sphere, tetrahedron, ring).
+- Real-time simulation: nodes orbit continuously with per-node speed + tilt, connected to the core by animated dashed line segments (`LineSegments` with shader dash offset). Slight physics-style trail using `MeshBasicMaterial` + additive blending + bloom (existing post pipeline).
+- Scroll behavior via GSAP ScrollTrigger:
+  - Pin the section, drive a `progress` value 0→1.
+  - Progress rotates the whole orbit rig, increases particle speed, and **focuses** the node matching the currently-active skill (camera lerps toward node, others dim to 25% opacity).
+  - Right column: each skill is a full-height panel with Syncopate name, JetBrains Mono category label, a short blurb, and a proficiency bar that fills as its panel enters view.
+- Mouse parallax on the rig (reusing the hero's damped lerp pattern).
+- Respects `prefers-reduced-motion`: freezes orbit, disables pin, shows a static grid of skill cards instead.
+- Lazy-loaded (`React.lazy` + Suspense) like `HeroCanvas`.
 
-Effects:
-- Glassmorphism utility (`@utility glass`) — blurred surface + ultra-thin border
-- Neon drop-shadow utility (`@utility glow-teal`)
-- Noise grain overlay (subtle SVG)
-- Lenis smooth scroll + GSAP ScrollTrigger
-- Custom cursor magnet hook (`useMagnetic`)
+Skills data lives in a new `src/data/skills.ts` (name, category, blurb, accent hex, geometry key, level 0–1).
 
-## Folder Structure
+### 2. Contact section — immersive form
 
-```text
-src/
-  routes/
-    __root.tsx           (fonts, head, Lenis provider, cursor)
-    index.tsx            (Hero + Experience + Projects + Footer scroll page)
-  components/
-    layout/
-      Navbar.tsx
-      Footer.tsx
-      Preloader.tsx
-      SmoothScroll.tsx   (Lenis bridge)
-      GrainOverlay.tsx
-    three/
-      HeroCanvas.tsx     (R3F Canvas + Suspense + EffectComposer)
-      ParticleCore.tsx   (instanced particle monolith, mouse inertia)
-      FooterTerrain.tsx  (shader plane wave grid)
-      ProjectViewer.tsx  (modal R3F viewer)
-      Lights.tsx
-    sections/
-      Hero.tsx
-      Experience.tsx
-      Projects.tsx
-      ProjectCard.tsx    (tilt + parallax)
-    ui/                  (existing shadcn)
-  hooks/
-    useMagnetic.ts
-    useMousePosition.ts
-    useLocalTime.ts
-    useScrollReveal.ts   (GSAP SplitText reveal)
-  lib/
-    motion.ts            (shared eases, variants)
-    three-utils.ts
-  styles.css             (tokens, glass/glow utilities, grain)
-```
+New `src/components/sections/Contact.tsx` + `src/components/three/ContactBackdrop.tsx`, mounted between Skills and Footer. Contact becomes the "Let's Connect" moment; Footer trims down to social row + local time + copyright.
 
-## Implementation Steps
+- Full-viewport section, background R3F canvas with:
+  - Slow-rotating volumetric aurora (shader plane with fbm noise in teal/mint) fading into the dark bg.
+  - Soft point light + rim light rig for "perfect lighting".
+  - Bloom + subtle chromatic aberration reused from the shared post pipeline.
+- Foreground glass card (`glass` + `glow-teal`) with ultra-thin border and inner gradient sheen that follows cursor (radial-gradient mask via `useMotionValue`).
+- Fields: **Name, Email, Subject, Message**. Floating labels, monospace helper text, focus glow ring in `--primary`, inline validation.
+- Submit button = magnetic CTA (reuse `useMagnetic`) with loading shimmer + success state morph ("Message sent ✓").
+- Left column: oversized Syncopate "LET'S BUILD SOMETHING REAL." headline, availability pill ("◇ Available Q3 2026"), direct email link to `kumarrohit60060@gmail.com`.
 
-1. **Dependencies**: `bun add three @react-three/fiber @react-three/drei @react-three/postprocessing postprocessing gsap @gsap/react lenis framer-motion`.
-2. **Design tokens & fonts**: rewrite `src/styles.css` with Aurora Forest oklch tokens, `@theme inline` mapping, `@utility glass`, `@utility glow-teal`, `@utility text-balance-tight`. Add Google Fonts `<link>` tags in `__root.tsx` head.
-3. **Smooth scroll + cursor**: `SmoothScroll.tsx` wraps app body with Lenis, syncs to GSAP ticker. Mount in `RootComponent`.
-4. **Preloader**: full-screen overlay reading R3F `useProgress`; animated SVG ring + monospace percent; exits with GSAP timeline.
-5. **Navbar**: floating glass pill, `framer-motion` `layoutId` underline morphing between active links, magnetic CTA via `useMagnetic`. Logo "RK //" with glitch on hover (CSS clip-path layers).
-6. **Hero**: `HeroCanvas` mounts `<Canvas>` with `ParticleCore` (instanced mesh of ~4000 points orbiting a distorted icosahedron; mouse-driven rotation with damped lerp; click pulses particle velocity). Bloom + chromatic aberration via `@react-three/postprocessing`. Foreground typographic overlay with GSAP staggered char reveal.
-7. **Experience**: vertical timeline with scroll-triggered reveals (GSAP ScrollTrigger), monospace year labels, glass cards.
-8. **Projects**: asymmetric CSS grid (col-span variations), `ProjectCard` uses Framer Motion `useMotionValue` rotateX/Y tilt + parallax cover. Click opens `ProjectViewer` modal — R3F canvas with OrbitControls rendering a placeholder GLTF/primitive per project.
-9. **Footer**: oversized "LET'S CONNECT." Syncopate headline, magnetic social links, JetBrains Mono local-time ticker, R3F `FooterTerrain` plane with custom vertex shader sine-wave grid fading to background.
-10. **Performance**: lazy-load `HeroCanvas`/`ProjectViewer`/`FooterTerrain` via `React.lazy` + Suspense; cap DPR `[1, 1.75]`; `shadow-map` only on hero key light; `frameloop="demand"` for footer terrain when offscreen (IntersectionObserver).
-11. **Accessibility**: respect `prefers-reduced-motion` (disable Lenis, freeze particles, fade-only reveals); semantic landmarks; focus-visible glow rings; alt text on project media.
-12. **SEO**: update `index.tsx` head with title "Rohit Kumar — 3D Web Architect & Creative Developer", description, og tags.
+### 3. Email delivery (Lovable Cloud + Lovable Emails)
 
-## Technical Notes
+Flow after plan approval:
+1. Enable Lovable Cloud.
+2. Check email domain status. If none, prompt the user to configure a sender domain via the setup dialog (required before sending).
+3. Once a domain exists (any status), run email infra setup + scaffold app-email templates.
+4. Add `src/lib/email-templates/contact-message.tsx` — React Email template with:
+   - Aurora-themed inline styles matching the site (deep bg card, mint accents, JetBrains Mono meta row).
+   - Fields: sender name, email (reply-to hint), subject, message body, submitted-at timestamp.
+5. Add a public server route `src/routes/api/public/contact.ts` (POST) that:
+   - Validates payload with Zod (trim, email, length caps: name ≤100, subject ≤150, message ≤2000).
+   - Rate-limits via a lightweight in-memory token bucket keyed on IP header (best-effort).
+   - Inserts row into a `contact_messages` table (Cloud) for record-keeping, with proper GRANTs + RLS (`service_role` only writes; no anon select).
+   - Calls the internal `/lovable/email/transactional/send` route using service-role auth to send `contact-message` to **kumarrohit60060@gmail.com** with `replyTo` = submitter, idempotency key = row id.
+6. `src/lib/contact/send.ts` — thin client helper the form posts to `/api/public/contact`.
 
-- TanStack Start runs SSR — guard all WebGL/Lenis/GSAP behind `useEffect` or dynamic import; canvas components are client-only via `React.lazy` + Suspense fallback (the preloader).
-- Tailwind v4: tokens in `@theme inline`, all custom utilities via `@utility`, no `tailwind.config.js`.
-- Fonts loaded with `<link>` in `__root.tsx` head — never `@import` remote URLs in `styles.css`.
-- No backend needed; everything is presentational. Lovable Cloud not required.
-- Project data + 3D models live in `src/data/projects.ts` with placeholder primitives until real GLTFs are supplied.
+### 4. Wiring
 
-## Open Questions
+- `src/routes/index.tsx`: import + mount `<Skills />` after `<Projects />` and `<Contact />` before `<Footer />`. Update meta description to mention skills + contact.
+- Trim `src/components/layout/Footer.tsx`: remove the giant "LET'S CONNECT" block (now owned by Contact); keep terrain wave, social row, local time, copyright.
+- Anchor IDs: `#skills` and `#contact`; add both to `Navbar` links (Home, Projects, Skills, Contact) and update the underline morph list.
 
-Before I build, two quick confirmations would sharpen the result — but I can also proceed with sensible defaults if you'd rather I just go.
+### Technical notes
 
-1. **Project content**: do you have real projects (titles, descriptions, links, images/GLTFs) to feature, or should I scaffold 4–6 placeholder projects you can edit later?
-2. **Experience content**: any roles/companies/years to include, or placeholder timeline entries?
+- No new heavy libs — reuses three, R3F, drei, postprocessing, GSAP ScrollTrigger, Framer Motion, Lenis, zod (already installed via shadcn form).
+- All new canvases lazy-loaded; DPR capped [1, 1.75]; `frameloop="demand"` for Skills when offscreen via IntersectionObserver.
+- Contact route lives at `/api/public/contact` so it bypasses auth (public form); signature-style protection isn't applicable, so we rely on Zod + rate limit + Cloud suppression list.
+- Recipient email `kumarrohit60060@gmail.com` is hardcoded server-side (not exposed to client).
 
-Reply with content or "use placeholders" and I'll implement.
+### Open items handled by defaults
+- Domain not yet set — I'll trigger the setup dialog once and pause until it's configured, then continue automatically.
+- No captcha added (adds friction + external dep); can layer hCaptcha later if spam appears.
