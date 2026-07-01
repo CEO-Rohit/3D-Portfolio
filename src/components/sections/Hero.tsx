@@ -47,12 +47,12 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          AVAILABLE · Q3 2026
+          About Me
         </motion.div>
 
         <h1
           ref={titleRef}
-          className="font-display text-[14vw] font-bold leading-[0.92] tracking-tight text-foreground md:text-[10vw] lg:text-[160px]"
+          className="font-display text-[14vw] font-bold leading-[0.92] tracking-tight text-foreground md:text-[10vw] lg:text-[105px]"
         >
           {title.map((word, wi) => (
             <span key={wi} className="block overflow-hidden">
@@ -77,18 +77,16 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.1 }}
-            className="max-w-md text-base text-muted-foreground md:text-lg"
-          >
-            3D Web Architect & Creative Developer crafting immersive WebGL
+            className="max-w-md text-base text-muted-foreground md:text-lg">
+            3D Web Architect & Full Stack Developer crafting immersive WebGL
             experiences at the edge of design and engineering.
           </motion.p>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 1.3 }}
-            className="flex items-center gap-6 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground"
-          >
+            className="flex items-center gap-6 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             <div>
               <div className="text-foreground/40">Lat</div>
               <div className="mt-1 text-foreground">28.61° N</div>
@@ -103,18 +101,18 @@ export function Hero() {
               <div className="text-foreground/40">Stack</div>
               <div className="mt-1 text-foreground">R3F · GLSL</div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
       >
         scroll ↓
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

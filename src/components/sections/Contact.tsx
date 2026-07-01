@@ -136,27 +136,27 @@ export function Contact() {
           <div className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
             ◇ 05 / Contact
           </div>
-          <h2 className="font-display text-5xl font-bold leading-[0.9] tracking-tighter md:text-7xl">
+          <h2 className="font-display text-3xl font-bold leading-[0.9] tracking-tighter md:text-6xl">
             LET'S BUILD
             <br />
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               SOMETHING REAL.
             </span>
           </h2>
-          <p className="mt-8 max-w-md text-muted-foreground md:text-lg">
+          <p className="mt-8 max-w-md text-muted-foreground md:text-lg text-color-white/80">
             Product sites, 3D interfaces, immersive brand moments. If it needs
             to feel alive on the web — send a note.
           </p>
 
-          <div className="mt-10 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
+          {/* <div className="mt-10 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
             Available · Q3 2026
-          </div>
+          </div> */}
 
-          <div className="mt-10">
+          {/* <div className="mt-10">
             <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
               Direct
             </div>
@@ -167,7 +167,7 @@ export function Contact() {
             >
               kumarrohit60060@gmail.com ↗
             </a>
-          </div>
+          </div> */}
         </div>
 
         {/* Right: glass form */}

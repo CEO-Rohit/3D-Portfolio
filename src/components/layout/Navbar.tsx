@@ -60,20 +60,7 @@ export function Navbar() {
           className="group relative flex h-10 items-center rounded-full px-4 font-mono text-sm font-medium text-foreground"
         >
           <span className="relative inline-block">
-            <span className="transition-opacity duration-200 group-hover:opacity-0">
-              RK //
-            </span>
-            <span
-              className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-              style={{
-                color: "var(--primary)",
-                textShadow:
-                  "1px 0 0 var(--accent), -1px 0 0 var(--destructive)",
-                animation: "none",
-              }}
-            >
-              RK //
-            </span>
+            <span className="absolute inset-0 rounded-full bg-primary/10 transition-opacity group-hover:opacity-100" />
           </span>
         </Link>
 
@@ -87,8 +74,7 @@ export function Navbar() {
                 href={l.href}
                 onMouseEnter={() => setHover(l.id)}
                 onClick={() => setActive(l.id)}
-                className="relative z-10 block rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
+                className="relative z-10 block rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
                 {l.label}
               </a>
               <AnimatePresence>
@@ -119,8 +105,7 @@ export function Navbar() {
             height="14"
             viewBox="0 0 14 14"
             fill="none"
-            className="-mr-0.5"
-          >
+            className="-mr-0.5">
             <path
               d="M3 7h8m0 0L7.5 3.5M11 7l-3.5 3.5"
               stroke="currentColor"

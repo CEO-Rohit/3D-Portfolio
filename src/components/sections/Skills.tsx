@@ -84,9 +84,6 @@ export function Skills() {
               </Suspense>
             )}
             {/* section label */}
-            <div className="pointer-events-none absolute left-0 top-0 font-mono text-xs uppercase tracking-[0.3em] text-primary">
-              ◇ 04 / Stack
-            </div>
             <div className="pointer-events-none absolute bottom-0 right-0 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
               realtime.simulation · {String(activeIndex + 1).padStart(2, "0")}/
               {String(skills.length).padStart(2, "0")}
