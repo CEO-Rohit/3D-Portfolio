@@ -2,32 +2,33 @@ import { motion } from "framer-motion";
 
 const roles = [
   {
-    year: "2024 — Now",
-    role: "Lead 3D Web Developer",
+    year: "2026 — Now",
+    role: "3D Web Developer",
     company: "Independent / Freelance",
     desc: "Building immersive WebGL flagship sites for design-led agencies and brands. R3F, GLSL shaders, performance budgets, motion design.",
-    stack: ["Three.js", "R3F", "GLSL", "GSAP"],
+    stack: ["Three.js", "R3F", "GLSL", "GSAP", "React"],
   },
   {
-    year: "2022 — 2024",
-    role: "Senior Creative Developer",
-    company: "Studio Nebula",
-    desc: "Shipped award-shortlisted product launches with custom shaders, scroll-orchestrated narratives, and bespoke component systems.",
-    stack: ["Next.js", "Lenis", "Framer", "TypeScript"],
+    year: "2026 — 2026",
+    role: "Full Stack Developer Intern",
+    company: "Digital Byte Solutions",
+    desc: "Developed Restaurant website, Manufacturing ERP, healthcare website",
+    stack: ["React", "NodeJs", "Express", "MongoDB", "PostgreSQL"],
   },
   {
-    year: "2020 — 2022",
-    role: "Frontend Engineer",
-    company: "Helix Labs",
-    desc: "Built design systems and data-dense interfaces. Migrated legacy stack to React + Tailwind; introduced motion language across product.",
-    stack: ["React", "Tailwind", "Storybook"],
+    year: "2025 — 2025",
+    role: "Java Full stack Developer",
+    company: "VaultOfCodes",
+    desc: "Developed full stack CRM and Online Reservatons systems.",
+    stack: ["Java", "Java Database Connectivity (JDBC)", "JSP", "Jakarta Servlet", "MySQL"],
   },
+
   {
-    year: "2018 — 2020",
-    role: "UI Developer",
-    company: "Pixelforge",
-    desc: "Crafted marketing sites and prototypes for early-stage startups. First steps into Three.js and procedural graphics.",
-    stack: ["JS", "WebGL", "SVG"],
+    year: "2024 — 2025",
+    role: "frontend Developer",
+    company: "ONLEI Technologies",
+    desc: "Developed responsive Blogging website and prototypes for early-stage startups.",
+    stack: ["JS", "CSS", "HTML"],
   },
 ];
 
@@ -43,9 +44,9 @@ export function Experience() {
             <div className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-primary">
               ◇ 02 / Experience
             </div>
-            <h2 className="font-display text-5xl font-bold tracking-tight md:text-7xl">
-              SIX YEARS<br />
-              <span className="text-muted-foreground">SHIPPING PIXELS.</span>
+            <h2 className="font-display text-4xl font-bold tracking-tight md:text-7xl">
+              MORE THAN TWO YEARS<br />
+              <span className="text-muted-foreground">fULL STACK DEVELOPEMENT</span>
             </h2>
           </div>
           <p className="max-w-sm text-muted-foreground">

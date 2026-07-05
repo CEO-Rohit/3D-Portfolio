@@ -92,11 +92,11 @@ export function Skills() {
 
           {/* text column */}
           <div className="relative col-span-1 md:col-span-5">
-            <h2 className="mb-8 font-display text-4xl font-bold tracking-tight md:text-5xl">
+            <h2 className="mb-8 font-display text-4xl font-bold tracking-tight md:text-3xl">
               THE STACK<br />
               <span className="text-muted-foreground">IN MOTION.</span>
             </h2>
-            <div className="relative h-[38vh] md:h-[50vh]">
+            <div className="relative h-[38vh] md:h-50vh]">
               {skills.map((s, i) => {
                 const isActive = i === activeIndex;
                 return (
@@ -127,7 +127,7 @@ export function Skills() {
                       {String(i + 1).padStart(2, "0")} · {s.category}
                     </div>
                     <h3
-                      className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-6xl"
+                      className="font-display text-2xl font-bold leading-[0.10] tracking-tight md:text-2xl"
                       style={{
                         textShadow: `0 0 40px ${s.hue}55`,
                       }}

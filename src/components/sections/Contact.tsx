@@ -277,7 +277,7 @@ export function Contact() {
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between gap-4 pt-2">
+                  <div className="flex-col md:flex-row lg:flex-row items-center justify-between gap-4 pt-2">
                     <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                       → routed to kumarrohit60060@gmail.com
                     </p>
@@ -292,7 +292,7 @@ export function Contact() {
                         {status === "loading" ? "Sending…" : "Send message"}
                       </span>
                       <span className="relative grid h-7 w-7 place-items-center rounded-full bg-primary-foreground/15 transition-transform group-hover:rotate-45">
-                        ↗
+                        
                       </span>
                     </button>
                   </div>

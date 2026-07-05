@@ -100,6 +100,51 @@ function Card({ p, onOpen }: { p: Project; onOpen: (p: Project) => void }) {
 }
 
 export function Projects() {
+  const projects = [
+    {
+      id: 1,
+      title: "Basque Restaurant",
+      image: "/projects/basque.jpeg",
+      description: "A modern and responsive restaurant website featuring online reservations, event booking, interactive navigation and an elegant user experience.",
+      live: "https://basquedehradun.com/",
+
+    },
+    {
+      id: 2,
+      title: "Manufacturing ERP",
+      image: "/projects/proFactory.jpeg",
+      description: "Interactive manufacturing dashboard with production insights, inventory control, analytics and responsive design for efficient business management.",
+      live: "https://manufacturingerp.netlify.app/",
+
+    },
+    {
+      id: 3,
+      title: "Nexa Care Healthcare",
+      image: "/projects/nexa.jpeg",
+      description: "A modern and responsive healthcare website featuring medical services, doctor information, appointment sections and a clean user experience.",
+      live: "https://nexa-caree.netlify.app/",
+
+    },
+
+    {
+      id: 4,
+      title: "Restro Takeaway",
+      image: "/projects/rest.jpeg",
+      description: "A modern and responsive restaurant website featuring online food ordering, takeaway services, menu showcase and an intuitive user experience.",
+      live: "https://restrotakeaway.netlify.app/",
+
+    },
+
+    {
+      id: 5,
+      title: "Flyward",
+      image: "/projects/flyward.jpeg",
+      description: "A modern aviation finance platform that helps airlines, lessors, financiers, and investors analyze aircraft maintenance costs, forecast cash flows, evaluate transactions, and make data-driven financial decisions through an intuitive and responsive interface.",
+      live: "https://www.flyward.com/",
+    }
+  ];
+
+
   const [open, setOpen] = useState<Project | null>(null);
 
   return (
@@ -121,18 +166,51 @@ export function Projects() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-12 md:auto-rows-[minmax(220px,auto)]">
-          {projects.map((p) => (
-            <Card key={p.id} p={p} onOpen={setOpen} />
-          ))}
-        </div>
+
+      </div>
+      {/* Card */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className="bg-[oklch(0.24_0.045_175)] border border-slate-700 rounded-3xl overflow-hidden shadow-xl flex flex-col"
+          >
+            <div className="p-3">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-48 sm:h-56 lg:h-60 object-cover rounded-2xl"
+              />
+            </div>
+
+            <div className="px-6 pb-6 flex flex-col flex-1">
+              <h2 className="text-2xl font-bold text-center mb-4 font-serif">
+                {project.title}
+              </h2>
+
+              <p className="text-gray-400 text-center text-sm leading-7 mb-6 ">
+                {project.description}
+              </p>
+
+              <div className="mt-auto flex flex-col sm:flex-row justify-center gap-4">
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className=" w-full sm:w-auto text-center px-6 py-3 rounded-full border border-slate-600"
+                >
+                  Visit Site
+                </a>
+
+              </div>
+            </div>
+          </div>
+        ))}
+
       </div>
 
-      {open && (
-        <Suspense fallback={null}>
-          <ProjectViewer project={open} onClose={() => setOpen(null)} />
-        </Suspense>
-      )}
+
     </section>
   );
 }
